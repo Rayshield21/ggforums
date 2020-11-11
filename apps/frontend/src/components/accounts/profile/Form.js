@@ -47,7 +47,7 @@ export class Form extends Component {
             <textarea name="bio" value={bio} placeholder='Bio' className='w-100' rows='10' onChange={this.onChange}/>
           </div>
           <input type="submit" value="Edit Profile" className="btn btn-primary mr-3"/>
-          <button className="btn btn-warning" onClick={this.onClick}>Cancel</button>
+          <button type='button' className="btn btn-warning" onClick={this.onClick}>Cancel</button>
         </form>
       </Fragment>
     )
