@@ -13,17 +13,32 @@ class UserSerializer(serializers.ModelSerializer):
     fields = ('id', 'username', 'email')
 
 # ProfileSerializer
-
 class ProfileSerializer(serializers.ModelSerializer):
   user = UserSerializer()
+  avatar_url = serializers.SerializerMethodField()
   class Meta:
     model = Profile
     fields = '__all__'
-
+  
+  def get_avatar_url(self, profile):
+    request = self.context.get("request")
+    avatar_url = profile.avatar.url
+    return request.build_absolute_uri(avatar_url)
 class UpdateProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = Profile
     exclude = ('user','avatar')
+
+class UpdateAvatarSerializer(serializers.ModelSerializer):
+  avatar_url = serializers.SerializerMethodField()
+  class Meta:
+    model = Profile
+    fields = ('avatar', 'avatar_url')
+
+  def get_avatar_url(self, profile):
+    request = self.context.get("request")
+    avatar_url = profile.avatar.url
+    return request.build_absolute_uri(avatar_url)
 
 # RegisterSerializer
 

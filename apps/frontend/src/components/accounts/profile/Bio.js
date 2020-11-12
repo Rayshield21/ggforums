@@ -18,7 +18,7 @@ export class Bio extends Component {
     this.setState({showEditProfile: formState})
   }
 
-  toggleEdit = () => this.setState({ isShowEdit: true })
+  toggleEdit = () => this.setState({ showEditProfile: true })
 
   render() {
     const { user:authUser } = this.props.auth

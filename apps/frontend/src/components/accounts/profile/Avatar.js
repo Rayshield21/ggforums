@@ -15,22 +15,26 @@ export class Avatar extends Component {
   }
 
   static propTypes = {
+    auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
   }
 
   render() {
-    const { avatar } = this.props.profile
+    const { user:authUser } = this.props.auth
+    const { avatar, user:profileUser } = this.props.profile
+
+    if (!profileUser || !authUser ) return <div/>
+
     return (
       <Fragment>
         <div className="card bg-transparent border-light">
           <img src={avatar ? avatar : '../../../../static/frontend/icons/person-circle.svg'} className='card-img' alt=""/>
-          <div className="card-img-overlay">
+          {profileUser.username == authUser.username ? <div className="card-img-overlay">
             <button onClick={this.handleClick} className='avatarBtn'>
-              <img src="../../../../static/frontend/icons/plus-square.svg" width="25" height="25"/>
+              <img src="../../../../static/frontend/icons/pencil-fill.svg" width="25" height="25"/>
             </button>
-          </div>
-        </div>
-        <CSSTransition
+          </div> : ''}          
+          <CSSTransition
           in={this.state.showEditAvatar}
           classNames='editAvatar'
           timeout={1000}
@@ -38,12 +42,14 @@ export class Avatar extends Component {
         >
           <EditAvatar handleClick={this.handleClick}/>
         </CSSTransition>
+        </div>
       </Fragment>
     )
   }
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   profile: state.profile.profile
 })
 

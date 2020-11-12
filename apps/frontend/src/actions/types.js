@@ -15,6 +15,5 @@ export const CREATE_MESSAGE = 'CREATE_MESSAGE'
 
 // PROFILE TYPES
 export const GET_PROFILE = 'GET_PROFILE';
-export const GET_FAIL = 'GET_FAIL';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const EDIT_PROFILE_FAIL = 'EDIT_FAIL';

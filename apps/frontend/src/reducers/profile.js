@@ -1,4 +1,4 @@
-import { GET_PROFILE, EDIT_PROFILE } from '../actions/types';
+import { GET_PROFILE, EDIT_PROFILE, GET_FAIL } from '../actions/types';
 
 const initialState = {
   profile: {}

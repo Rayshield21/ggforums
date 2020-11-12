@@ -1,13 +1,12 @@
-from rest_framework import generics, permissions, viewsets, parsers, exceptions
+from rest_framework import generics, permissions, viewsets, exceptions, status
 from rest_framework.response import Response
+from rest_framework.parsers import FormParser
 from knox.models import AuthToken
 from .models import Profile
 from PIL import Image
+from django.views.generic import UpdateView
 from django.shortcuts import get_object_or_404
-from .serializers import (UserSerializer, RegisterSerializer, LoginSerializer, ProfileSerializer, UpdateProfileSerializer)
-
-class ImageUploadParser(parsers.FileUploadParser):
-  media_type = 'image/*';
+from .serializers import (UserSerializer, RegisterSerializer, LoginSerializer, ProfileSerializer, UpdateProfileSerializer, UpdateAvatarSerializer)
 
 # REGISTER
 
@@ -64,14 +63,12 @@ class ViewProfileAPI(generics.RetrieveAPIView):
   serializer_class = ProfileSerializer
 
   def get_object(self, *args, **kwargs):
-    return Profile.objects.get(user__username=self.kwargs['username'])
+    return get_object_or_404(Profile, user__username=self.kwargs['username'])
 
 class EditProfileAPI(generics.UpdateAPIView):
   permission_classes = [
-    permissions.AllowAny
+    permissions.IsAuthenticated
   ]
-
-  parser_class = (ImageUploadParser,)
 
   lookup_field = 'user'
   lookup_url_kwarg = 'username'
@@ -80,17 +77,27 @@ class EditProfileAPI(generics.UpdateAPIView):
   def get_object(self, *args, **kwargs):
     return get_object_or_404(Profile, user__username=self.kwargs['username'])
 
+class EditAvatarAPI(generics.UpdateAPIView):
+  permission_classes = [
+    permissions.IsAuthenticated
+  ]
+
+  parser_class = (FormParser,)
+
+  lookup_field = 'user'
+  lookup_url_kwarg = 'username'
+
+  serializer_class = UpdateAvatarSerializer
+
+  def get_object(self, *args, **kwargs):
+    return get_object_or_404(Profile, user__username=self.kwargs['username'])
+
   # def put(self, request, *args, **kwargs):
-  #   if 'file' not in request.data:
-  #     raise exceptions.ParseError("Empty Content")
+  #   instance = self.get_object
+  #   serializer = self.get_serializer(instance, data=request.data)
+  #   serializer.is_valid(raise_exception=True)
+  #   self.perform_update(serializer)
+  #   return Response(serializer.data, status=status.HTTP_200_OK)
 
-  #   f = request.data['file']
-
-  #   try:
-  #     img = Image.open(f)
-  #     img.verify()
-  #   except:
-  #     raise exceptions.ParseError("Unsupported Image Type")
-
-  #   Profile.avatar.save(f.name, f, save=True)
-  #   return Response(status=status.HTTP_201_CREATED)
+  # def perform_update(self, serializer):
+  #   serializer.save()

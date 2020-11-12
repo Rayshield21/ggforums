@@ -8,10 +8,10 @@
 }
 
 .editAvatar{
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  position: absolute;
+  top: 0;
   z-index: 1;
+  width: 100%;
 }
 
 .editAvatar-enter {
