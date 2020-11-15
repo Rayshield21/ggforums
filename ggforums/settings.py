@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.frontend',
     'rest_framework',
-    'knox'
+    'knox',
+    'django_cleanup'
 ]
 
 REST_FRAMEWORK = {
