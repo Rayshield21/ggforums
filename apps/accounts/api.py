@@ -43,16 +43,6 @@ class UserAPI(generics.RetrieveAPIView):
 
   def get_object(self):
     return self.request.user
-
-class ListProfileAPI(generics.ListAPIView):
-  permission_classes = [
-    permissions.AllowAny
-  ]
-
-  serializer_class = ProfileSerializer
-
-  queryset = Profile.objects.all()
-
 class ViewProfileAPI(generics.RetrieveAPIView):
   permission_classes = [
     permissions.AllowAny

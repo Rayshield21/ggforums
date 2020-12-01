@@ -24,22 +24,21 @@ export class Bio extends Component {
     const { user:authUser } = this.props.auth
     const { first_name, last_name, bio, user:profileUser } = this.props.profile
     const { showEditProfile } = this.state
-    const showButton = (
+    const showButton = !authUser || !profileUser ? '' : authUser.username == profileUser.username ? (
       <button className="btn btn-outline-primary w-100" onClick={this.toggleEdit}>Edit Profile</button>
-    )
+    ) : ''
     const showForm = (
       <Form profile={this.props.profile} bioCallback={this.handleCallBack}/>
     )
 
-    if(!profileUser || !authUser) return <div/>;
-
+    if(!profileUser) return <div/>;
     return (
       <Fragment>
         <Avatar />
         <h3 className='text-center'>{profileUser.username}'s Profile</h3>
         <p>{first_name} {last_name}</p>
         <p>{bio}</p>
-        { showEditProfile ? showForm : authUser.username == profileUser.username ? showButton : ''} 
+        { showEditProfile ? showForm : showButton} 
       </Fragment>
     )
   }

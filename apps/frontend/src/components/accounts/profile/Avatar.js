@@ -22,18 +22,18 @@ export class Avatar extends Component {
   render() {
     const { user:authUser } = this.props.auth
     const { avatar, user:profileUser } = this.props.profile
-
-    if (!profileUser || !authUser ) return <div/>
+    const showButton = !authUser ? '' : authUser.username == profileUser.username ? (
+      <div className="card-img-overlay">
+        <button onClick={this.handleClick} className='avatarBtn'>
+          <img src="../../../../static/frontend/icons/pencil-fill.svg" width="25" height="25"/>
+        </button>
+      </div> 
+    ) : ''
 
     return (
       <Fragment>
         <div className="card bg-transparent border-light">
-          <img src={avatar ? avatar : '../../../../static/frontend/icons/person-circle.svg'} className='card-img' alt=""/>
-          {profileUser.username == authUser.username ? <div className="card-img-overlay">
-            <button onClick={this.handleClick} className='avatarBtn'>
-              <img src="../../../../static/frontend/icons/pencil-fill.svg" width="25" height="25"/>
-            </button>
-          </div> : ''}          
+          <img src={avatar ? avatar : '../../../../static/frontend/icons/person-circle.svg'} className='card-img' alt=""/> {showButton}       
           <CSSTransition
           in={this.state.showEditAvatar}
           classNames='editAvatar'

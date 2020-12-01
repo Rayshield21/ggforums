@@ -17,3 +17,10 @@ export const CREATE_MESSAGE = 'CREATE_MESSAGE'
 export const GET_PROFILE = 'GET_PROFILE';
 export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const EDIT_PROFILE_FAIL = 'EDIT_FAIL';
+
+// POSTS TYPES
+export const GET_POSTS = 'GET_POSTS'
+export const GET_SINGLE_POST = 'GET_SINGLE_POST'
+export const CREATE_POST = 'CREATE_POST'
+export const UPDATE_POST = 'UPDATE_POST'
+export const DELETE_POST = 'DELETE_POST'

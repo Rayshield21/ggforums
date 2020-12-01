@@ -4,7 +4,7 @@ import Bio from './Bio';
 import ProfileContent from './ProfileContent';
 import { getProfile } from '../../../actions/profile';
 import PropTypes from 'prop-types'
-import './ProfileStyle.css';
+import './style.css';
 
 export class Profile extends Component {
 

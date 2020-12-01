@@ -28,7 +28,8 @@ class App extends Component {
               {/* <Alerts/> */}
               <div className="container">
                 <Switch>
-                  <PrivateRoute exact path='/' component={Dashboard}/>
+                  {/* <PrivateRoute exact path='/post/create' component={Dashboard}/> */}
+                  <Route exact path='/' component={Dashboard} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/profile/:username' component={Profile} />
