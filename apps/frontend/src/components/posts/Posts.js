@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
-import Form from './Form'
 import PropTypes from 'prop-types'
 import './style.css'
+import CreatePostModal from './CreatePostModal'
 export class Posts extends Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
@@ -17,7 +17,7 @@ export class Posts extends Component {
     const { posts } = this.props
     return (
       <Fragment>
-        <Form />
+        <CreatePostModal />
           { posts.length > 0 ? 
             posts.map(post => (
             <div className='card card-body' key={post.id}>
