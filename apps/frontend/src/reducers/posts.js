@@ -1,6 +1,6 @@
 import { 
   GET_POSTS, 
-  GET_SINGLE_POST, 
+  GET_POST_DETAIL, 
   CREATE_POST, 
   UPDATE_POST, 
   DELETE_POST } from '../actions/types'
@@ -12,14 +12,15 @@ const initialState = {
 export default function(state = initialState, action){
   switch(action.type){
     case GET_POSTS:
+    // case GET_POST_PostDetail:
       return {
         ...state,
         posts: action.payload
       }
-    case GET_SINGLE_POST:
+    case GET_POST_DETAIL:
       return {
         ...state,
-        posts: state.posts.filter(post => post.id == action.payload)
+        posts: [action.payload]
       }
     case CREATE_POST:
       return {

@@ -1,18 +1,34 @@
 import axios from 'axios'
 import { 
   GET_POSTS,
-  GET_SINGLE_POST,
+  GET_POST_DETAIL,
   CREATE_POST,
   UPDATE_POST,
   DELETE_POST
 } from './types'
 import { tokenConfig } from './auth'
+import { bindActionCreators } from 'redux'
 
 export const getPosts = () => dispatch => {
   axios.get('/api/posts/')
     .then(res => {
       dispatch({
         type: GET_POSTS,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err.response.data)
+      console.log(err.response.status)
+      console.log(err.request)
+    })
+}
+
+export const getPostDetail = (id) => dispatch => {
+  axios.get(`/api/posts/${id}/`)
+    .then(res => {
+      dispatch({
+        type: GET_POST_DETAIL,
         payload: res.data
       })
     })

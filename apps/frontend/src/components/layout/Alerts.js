@@ -13,7 +13,7 @@ export class Alerts extends Component {
     const { error, message } = this.props;
     if(error !== prevProps.error){
       for(let key in error.msg){
-        if(key != 'detail'){
+        if(key != 'PostDetail'){
           if(error.msg[key]) console.log('error')
         }
       }

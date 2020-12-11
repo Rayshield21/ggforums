@@ -9,7 +9,8 @@ import Header from './layout/Header';
 import Alerts from './layout/Alerts'
 import Login from './accounts/Login';
 import Register from './accounts/Register';
-import Dashboard from './posts/Dashboard';
+import PostList from './posts/PostList';
+import PostDetail from './posts/PostDetail'
 import Profile from './accounts/profile/Profile'
 import store from '../store'
 import { loadUser } from '../actions/auth'
@@ -28,11 +29,12 @@ class App extends Component {
               {/* <Alerts/> */}
               <div className="container">
                 <Switch>
-                  {/* <PrivateRoute exact path='/post/create' component={Dashboard}/> */}
-                  <Route exact path='/' component={Dashboard} />
+                  {/* <PrivateRoute exact path='/post/create' component={PostList}/> */}
+                  <Route exact path='/' component={PostList} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/profile/:username' component={Profile} />
+                  <Route exact path='/posts/:id' component={PostDetail} />
                 </Switch>
               </div>
             </Fragment>
