@@ -7,7 +7,7 @@ import {
   DELETE_POST
 } from './types'
 import { tokenConfig } from './auth'
-import { bindActionCreators } from 'redux'
+
 
 export const getPosts = () => dispatch => {
   axios.get('/api/posts/')
@@ -55,6 +55,22 @@ export const createPost = (post) => (dispatch, getState) => {
       dispatch({
         type: CREATE_POST,
         payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err.response.data)
+      console.log(err.response.status)
+      console.log(err.request)
+    })
+}
+
+export const deletePost = (id) => (dispatch, getState) => {
+  const config = tokenConfig(getState)
+  axios.delete(`/api/posts/${id}`, config)
+    .then(res => {
+      dispatch({
+        type: DELETE_POST,
+        payload: id
       })
     })
     .catch(err => {

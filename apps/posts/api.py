@@ -1,7 +1,6 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.parsers import FormParser, MultiPartParser
-from .permissions import ReadOnlyPermission
 from .serializers import PostSerializer, PostImagesSerializer
 from .models import Post
 
