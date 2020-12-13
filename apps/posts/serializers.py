@@ -14,9 +14,20 @@ class PostSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     images_data = self.context.get('request').FILES
-    print(images_data)
     post = Post.objects.create(**validated_data)
     for image_data in images_data.getlist('post_images'):
       PostImages.objects.create(post=post, image=image_data)
     return post
 
+  def update(self, instance, validate_data):
+    images_data = self.context.get('request').FILES
+    instance.title = validate_data.get('title', instance.title)
+    instance.message = validate_data.get('message', instance.message)
+    instance.save()
+    instance_images = PostImages.objects.filter(post=instance)
+    instance_images.delete()
+
+    for image_data in images_data.getlist('post_images'):
+      PostImages.objects.create(post=instance, image=image_data)
+
+    return instance
