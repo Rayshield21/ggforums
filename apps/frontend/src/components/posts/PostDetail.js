@@ -3,6 +3,7 @@ import { getPostDetail } from '../../actions/posts';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import Posts from './Posts'
+import Items from '../common/Items'
 
 export class PostDetail extends Component {
   
@@ -16,12 +17,20 @@ export class PostDetail extends Component {
   }
 
   render() {
+    const { posts } = this.props
     return (
       <Fragment>
-        <Posts />
+        <Items 
+          resource={posts}
+          render={post => <Posts post={post} key={post.id}/>}
+        />
       </Fragment>
     )
   }
 }
 
-export default connect(null, { getPostDetail })(PostDetail)
+const mapStateToProps = state => ({
+  posts: state.posts.posts
+})
+
+export default connect(mapStateToProps, { getPostDetail })(PostDetail)

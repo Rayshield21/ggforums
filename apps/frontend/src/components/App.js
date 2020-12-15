@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-// import { Provider as AlertProvider } from 'react-alert'
 import { Provider } from 'react-redux'
-// import AlertTemplate from 'react-alert-template-basic'
 import ReactDOM from 'react-dom';
 import PrivateRoute from './common/PrivateRoute'
 import Header from './layout/Header';
