@@ -6,7 +6,7 @@ import PostImages from './PostImages'
 import PropTypes from 'prop-types'
 import './style.css'
 
-const Posts = ({deletePost, post}) => (
+const Posts = ({post, deletePost, handleUpdate}) => (
   <div className='card card-body'>
     <div className="title">
       <h3 className='d-inline-block'>
@@ -18,7 +18,8 @@ const Posts = ({deletePost, post}) => (
         >
           <i className="fas fa-trash-alt"></i>
         </button>
-        <button className='btn btn-outline-warning btn-sm'>
+        <button className='btn btn-outline-warning btn-sm' 
+          onClick={handleUpdate.bind(this, post)}>
           <i className="fas fa-edit"></i>
         </button>
       </div>

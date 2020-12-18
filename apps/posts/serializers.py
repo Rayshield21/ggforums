@@ -6,11 +6,12 @@ class PostImagesSerializer(serializers.ModelSerializer):
     model = PostImages
     fields = ('image',)
 class PostSerializer(serializers.ModelSerializer):
+  
   post_images = PostImagesSerializer(many=True, required=False)
   author = serializers.StringRelatedField()
   class Meta:
     model = Post
-    fields = '__all__'
+    fields = ('id', 'author', 'title', 'message', 'post_images', 'author')
 
   def create(self, validated_data):
     images_data = self.context.get('request').FILES

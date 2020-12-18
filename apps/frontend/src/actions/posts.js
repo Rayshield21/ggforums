@@ -64,6 +64,31 @@ export const createPost = (post) => (dispatch, getState) => {
     })
 }
 
+export const updatePost = (post, id) => (dispatch, getState) => {
+  const config = tokenConfig(getState)
+  const formData = new FormData()
+  formData.append('title', post.title)
+  formData.append('message', post.message)
+  if(post.post_images.length){
+    post.post_images.forEach((image, index) => {
+      formData.append('post_images', image, image.name)
+    })
+  }
+  config.headers['Content-Type'] = 'multipart/form-data'  
+  axios.put(`api/posts/${id}/`, formData, config)
+    .then(res => {
+      dispatch({
+        type: UPDATE_POST,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err.response.data)
+      console.log(err.response.status)
+      console.log(err.request)
+    })
+}
+
 export const deletePost = (id) => (dispatch, getState) => {
   const config = tokenConfig(getState)
   axios.delete(`/api/posts/${id}`, config)
