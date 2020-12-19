@@ -71,8 +71,10 @@ export const updatePost = (post, id) => (dispatch, getState) => {
   formData.append('message', post.message)
   if(post.post_images.length){
     post.post_images.forEach((image, index) => {
-      formData.append('post_images', image, image.name)
+      formData.append('post_images', image)
     })
+  } else {
+    formData.append('post_images', '')
   }
   config.headers['Content-Type'] = 'multipart/form-data'  
   axios.put(`api/posts/${id}/`, formData, config)

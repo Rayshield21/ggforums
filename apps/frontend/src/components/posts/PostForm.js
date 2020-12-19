@@ -25,8 +25,8 @@ export class PostForm extends Component {
       message: post[message],
       images: post[post_images].length ? post[post_images].map(post_image => 
         post_image.image) : [],
-      imageFiles: post[post_images].length ? post[post_images].map(post_image => 
-        new File(['blob'], post_image.image)) : []
+      imageFiles: post[post_images].length ? post[post_images].map(post_image =>
+        post_image.image_file_str) : [],
     })
   }
 
@@ -52,7 +52,6 @@ export class PostForm extends Component {
 
   handleImageInput = e => {
     const imageFile = e.target.files[0]
-    console.log(imageFile)
     const imageURL = URL.createObjectURL(imageFile)
     this.setState(prevState => ({
       images: [...prevState.images, imageURL],

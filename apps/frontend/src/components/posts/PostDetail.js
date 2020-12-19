@@ -37,7 +37,6 @@ export class PostDetail extends Component {
         <Items 
           resource={posts}
           render={post => {
-            //console.log(post)
             return <Posts post={post} key={post.id} 
             handleUpdate={this.handleUpdate}/>}}
         />
