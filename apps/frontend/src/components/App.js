@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
-import PrivateRoute from './common/PrivateRoute'
+import PostRoute from './common/PostRoute'
 import Header from './layout/Header';
 import Alerts from './layout/Alerts'
 import Login from './accounts/Login';
@@ -27,12 +27,11 @@ class App extends Component {
               {/* <Alerts/> */}
               <div className="container">
                 <Switch>
-                  {/* <PrivateRoute exact path='/post/create' component={PostList}/> */}
-                  <Route exact path='/' component={PostList} />
+                  <Route key='list' exact path='/' component={PostList} />
+                  <Route key='detail' exact path='/posts/:id' component={PostList} />
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/profile/:username' component={Profile} />
-                  <Route exact path='/posts/:id' component={PostDetail} />
                 </Switch>
               </div>
             </Fragment>

@@ -3,17 +3,17 @@ import { Modal } from 'react-bootstrap'
 import Form from '../common/Form'
 import PostForm from './PostForm'
 
-const ModalWrapper = ({instance, showModal, closeModal, action}) => (
+const ModalWrapper = ({instance, showModal, closeModal, writeAction}) => (
   <Modal show={showModal} onHide={closeModal}>
     <Modal.Header closeButton>
-      <Modal.Title>{action}</Modal.Title>
+      <Modal.Title>{writeAction}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Form
         fields={['title', 'message', 'post_images']}
         resource={instance}
         render={ (post, fields) => <PostForm instance={post} fields={fields} 
-          action={action} closeModal={closeModal}/>}
+          writeAction={writeAction} closeModal={closeModal}/>}
       />
     </Modal.Body>
   </Modal>
